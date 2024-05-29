@@ -9,4 +9,4 @@ Pascals triangle or Pascal's triangle is a special triangle that is named after 
 
 Pascals triangle or Pascal's triangle is shown in the image below. Here, we can see that any number is the sum of the two numbers just above that number.
 
-[!image](./pascal_triangle.png)
+![image](https://github.com/Abdallah-Abdelrahman/alx-interview/blob/main/0x00-pascal_triangle/pascal_triangle.png)
