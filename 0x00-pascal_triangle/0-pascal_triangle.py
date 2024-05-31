@@ -20,7 +20,7 @@ def pascal_triangle(n):
         triangle.append([])
         for col in range(row + 1):
             item = 1
-            if col > 0 and col != row:
+            if 0 < col < row:
                 item = triangle[row - 1][col - 1] + triangle[row - 1][col]
             triangle[row].append(item)
 
