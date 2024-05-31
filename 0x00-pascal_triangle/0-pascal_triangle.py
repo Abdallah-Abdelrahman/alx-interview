@@ -11,19 +11,17 @@ def pascal_triangle(n):
     Returns: empty list empty list if n <= 0,
         otherwise list of lists of integers.
     '''
-    _list = []
+    triangle = []
 
     if n <= 0:
-        return _list
+        return triangle
 
     for row in range(n):
-        _list.append([])
+        triangle.append([])
         for col in range(row + 1):
-            item = row
-            if not col or col == row:
-                item = 1
-            else:
-                item = _list[row - 1][col - 1] + _list[row - 1][col]
-            _list[row].append(item)
+            item = 1
+            if col > 0 and col != row:
+                item = triangle[row - 1][col - 1] + triangle[row - 1][col]
+            triangle[row].append(item)
 
-    return _list
+    return triangle
