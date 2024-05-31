@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 '''Module defines pascal_triangle function'''
 
 
@@ -10,10 +11,11 @@ def pascal_triangle(n):
     Returns: empty list empty list if n <= 0,
         otherwise list of lists of integers.
     '''
-    if n <= 0:
-        return []
-
     _list = []
+
+    if n <= 0:
+        return _list
+
     for row in range(n):
         _list.append([])
         for col in range(row + 1):
