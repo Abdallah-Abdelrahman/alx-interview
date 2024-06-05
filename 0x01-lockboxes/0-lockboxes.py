@@ -6,14 +6,16 @@ and `canUnlockAll` function
 
 class Node:
     '''define a node in the singly linked list'''
+
     def __init__(self, value):
         '''initialize the instance'''
-        self.value: int = value
+        self.value = value
         self.next = None
 
 
 class LinkedList:
     '''define a singly linked list'''
+
     def __init__(self):
         '''initialize the instance'''
         self.head = None
@@ -50,6 +52,7 @@ class LinkedList:
 
 class Queue:
     '''Define a queue data structure'''
+
     def __init__(self):
         '''initialize the instance'''
         self.rear = 0
@@ -61,7 +64,7 @@ class Queue:
         self.rear += 1
         self.singly_list.append(val)
 
-    def dequeue(self) -> int:
+    def dequeue(self):
         '''remove a value from the front.
 
         Returns:
