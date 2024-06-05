@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-'''Module defines `canUnlockAll` function'''
-from typing import Optional
+'''Module defines `Node`, `LinkedList`, `Queue` classes
+and `canUnlockAll` function
+'''
 
 
 class Node:
@@ -8,7 +9,7 @@ class Node:
     def __init__(self, value: int):
         '''initialize the instance'''
         self.value: int = value
-        self.next: Optional[Node] = None
+        self.next: Node | None = None
 
 
 class LinkedList:
