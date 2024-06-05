@@ -12,15 +12,21 @@ def canUnlockAll(boxes):
     if not isinstance(boxes, list):
         return False
 
-    unlocked = set()
     len_ = len(boxes)
+    unlocked = set([0])
+    front = 0
+    rear = 1
+    keys = [0]
 
-    for box in (boxes):
-        unlocked.update(k for k in box if 0 < k < len_)
-    for k in unlocked:
-        # print(k)
-        if k == 0 and len(boxes[k]) == 0:
-            return False
-        if 0 < k < len_ - 1 and len(boxes[k]) == 0:
-            return False
-    return True
+    while front != rear:
+        if front >= len_:
+            break
+        for key in boxes[keys[front]]:
+            if key not in unlocked and key < len_:
+                unlocked.add(key)
+                keys.insert(rear, key)
+                rear += 1
+        front += 1
+
+    # print(unlocked, boxes)
+    return len_ == len(unlocked)
