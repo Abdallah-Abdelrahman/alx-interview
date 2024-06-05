@@ -6,10 +6,10 @@ and `canUnlockAll` function
 
 class Node:
     '''define a node in the singly linked list'''
-    def __init__(self, value: int):
+    def __init__(self, value):
         '''initialize the instance'''
         self.value: int = value
-        self.next: Node | None = None
+        self.next = None
 
 
 class LinkedList:
@@ -19,7 +19,7 @@ class LinkedList:
         self.head = None
         self.tail = None
 
-    def append(self, value: int):
+    def append(self, value):
         '''append a value at the end of the list'''
         node = Node(value)
         if not self.head:
@@ -28,7 +28,7 @@ class LinkedList:
             self.tail.next = node
             self.tail = node
 
-    def prepend(self, value: int):
+    def prepend(self, value):
         '''prepend a value in the list'''
         node = Node(value)
         if self.head:
@@ -41,7 +41,7 @@ class LinkedList:
             tmp = self.head
             val = tmp.value
             self.head = tmp.next
-            if not self.head:
+            if not self.head:  # list is empty now
                 self.tail = self.head
             tmp = None
             return val
