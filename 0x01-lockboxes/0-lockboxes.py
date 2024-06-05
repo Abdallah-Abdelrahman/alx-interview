@@ -18,7 +18,6 @@ def canUnlockAll(boxes):
     for box in boxes:
         unlocked.update(box)
 
-
     if 0 in unlocked:
         unlocked.remove(0)
     print(unlocked, boxes)
