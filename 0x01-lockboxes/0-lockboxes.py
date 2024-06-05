@@ -41,7 +41,7 @@ class LinkedList:
             tmp = self.head
             val = tmp.value
             self.head = tmp.next
-            if not self.head:  # list is empty now
+            if not self.head:
                 self.tail = self.head
             tmp = None
             return val
