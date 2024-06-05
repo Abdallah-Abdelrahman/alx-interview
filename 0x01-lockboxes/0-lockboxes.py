@@ -88,12 +88,10 @@ def canUnlockAll(boxes):
 
     len_ = len(boxes)
     unlocked = set([0])
-    q = Queue()
+    q = Queue()  # we use queue instead of list for faster insertion & deletion
     q.enqueue(0)
 
     while q.front != q.rear:
-        if q.front >= len_:
-            break
         for key in boxes[q.dequeue()]:
             if key not in unlocked and key < len_:
                 unlocked.add(key)
