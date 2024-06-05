@@ -18,10 +18,7 @@ def canUnlockAll(boxes):
     for i, box in enumerate(boxes):
         if i == 0 and len(box) == 0:
             return False
-        unlocked.update(box)
+        unlocked.update(k for k in box if 0 < k < len_)
 
-    if 0 in unlocked:
-        unlocked.remove(0)
-    print(unlocked, boxes)
-    # return len_ - 1 == len(unlocked)
-    return True
+    # print(unlocked, boxes)
+    return len_ - 1 == len(unlocked)
