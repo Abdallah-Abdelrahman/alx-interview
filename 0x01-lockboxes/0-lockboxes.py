@@ -9,13 +9,15 @@ def canUnlockAll(boxes):
     Returns:
         bool: True if all boxes can be opened, else return False
     '''
-    unlocked = set()
     if not isinstance(boxes, list):
         return False
 
+    unlocked = set()
     len_ = len(boxes)
 
-    for box in boxes:
+    for i, box in enumerate(boxes):
+        if i == 0 and len(box) == 0:
+            return False
         unlocked.update(box)
 
     if 0 in unlocked:
