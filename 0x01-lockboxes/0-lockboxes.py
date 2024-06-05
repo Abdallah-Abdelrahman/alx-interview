@@ -15,9 +15,12 @@ def canUnlockAll(boxes):
     unlocked = set()
     len_ = len(boxes)
 
-    for i, box in enumerate(boxes):
+    for box in (boxes):
         unlocked.update(k for k in box if 0 < k < len_)
-
-    # print(unlocked, boxes)
-    # return len_ - 1 == len(unlocked)
-    return False
+    for k in unlocked:
+        # print(k)
+        if k == 0 and len(boxes[k]) == 0:
+            return False
+        if 0 < k < len_ - 1 and len(boxes[k]) == 0:
+            return False
+    return True
