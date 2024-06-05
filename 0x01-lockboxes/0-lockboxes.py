@@ -20,4 +20,4 @@ def canUnlockAll(boxes):
 
     # print(unlocked, boxes)
     # return len_ - 1 == len(unlocked)
-    return True
+    return False
