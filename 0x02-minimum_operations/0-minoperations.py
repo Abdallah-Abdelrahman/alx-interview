@@ -10,4 +10,16 @@ def minOperations(n):
     Returns:
         int: number of operations
     '''
-    pass
+    ops = 0
+    div = 2
+
+    if n < 2:
+        return ops
+
+    while n > 1:
+        if n % div == 0:
+            n //= div
+            ops += div
+        else:
+            div += 1
+    return ops
