@@ -31,7 +31,7 @@ def handler(signum, frame):
 
 
 if __name__ == '__main__':
-    i = 0
+    i = 1
     total = 0
     # signal interrupt handler
     signal.signal(signal.SIGINT, handler)
@@ -49,14 +49,13 @@ if __name__ == '__main__':
             continue
 
         _, __, ___, status_code, size = m.groups()
-        # size, status_code = toks[-1].replace('\n', ''), toks[-2]
 
         if status_code.isnumeric and int(status_code) in STATUS:
             STATUS[int(status_code)] += 1
         if size.isnumeric:
             total += int(size)
 
-        if i > 0 and i % 10 == 0:
+        if i % 10 == 0:
             # print statistic
             print_statistics(total)
         i += 1
