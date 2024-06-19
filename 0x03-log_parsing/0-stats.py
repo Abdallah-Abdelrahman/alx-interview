@@ -48,11 +48,13 @@ if __name__ == '__main__':
                     )
             m = regex.match(line)
 
-            if not m:
-                # there's no match skip line
-                continue
+            # if not m:
+            #     # there's no match skip line
+            #     continue
+            toks = line.split()
+            status_code, size = toks[-2], toks[-1]
 
-            _, __, ___, status_code, size = m.groups()
+            # _, __, ___, status_code, size = m.groups()
 
             if status_code.isnumeric and int(status_code) in STATUS:
                 STATUS[int(status_code)] += 1
