@@ -32,7 +32,7 @@ def handler(signum, frame):
 
 
 # signal interrupt handler
-# signal.signal(signal.SIGINT, handler)
+signal.signal(signal.SIGINT, handler)
 
 if __name__ == '__main__':
     i = 1
