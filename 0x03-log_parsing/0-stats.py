@@ -66,6 +66,6 @@ if __name__ == '__main__':
             # book keeping
             i += 1
     except KeyboardInterrupt:
-        pass
+        print_statistics(total)
     finally:
         print_statistics(total)
