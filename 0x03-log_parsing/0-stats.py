@@ -50,6 +50,7 @@ if __name__ == '__main__':
             # there's no match skip line
             continue
 
+        i += 1
         _, __, ___, status_code, size = m.groups()
 
         if status_code.isnumeric and int(status_code) in STATUS:
@@ -60,4 +61,3 @@ if __name__ == '__main__':
         if i % 10 == 0:
             # print statistic
             print_statistics(total)
-        i += 1
