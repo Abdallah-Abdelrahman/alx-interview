@@ -18,10 +18,10 @@ STATUS = {
 
 def print_statistics(total):
     '''print statistics'''
-    out = f'File size: {total}\n'
+    out = 'File size: {}\n'.format(total)
     for k, v in sorted(STATUS.items()):
         if v > 0:
-            out += f'{k}: {v}\n'
+            out += '{}: {}\n'.format(k, v)
     print(out, end='')
 
 
@@ -41,12 +41,12 @@ if __name__ == '__main__':
     try:
         for line in stdin:
             # regex to match log line
-            regex = compile(
-                    r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
-                    r' - \[\S+ \S+\] "GET /projects/260 HTTP/1.1" '
-                    r'(\d{3}) (\d+)$'
-                    )
-            m = regex.match(line)
+            # regex = compile(
+            #         r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+            #         r' - \[\S+ \S+\] "GET /projects/260 HTTP/1.1" '
+            #         r'(\d{3}) (\d+)$'
+            #         )
+            # m = regex.match(line)
 
             # if not m:
             #     # there's no match skip line
@@ -68,6 +68,6 @@ if __name__ == '__main__':
             # book keeping
             i += 1
     except KeyboardInterrupt:
-        print_statistics(total)
+        pass
     finally:
         print_statistics(total)
