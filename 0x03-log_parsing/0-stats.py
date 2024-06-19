@@ -61,8 +61,7 @@ if __name__ == '__main__':
 
             if (i) % 10 == 0:
                 # print statistic
-                if total > 0:
-                    print_statistics(total)
+                print_statistics(total)
 
             # book keeping
             i += 1
