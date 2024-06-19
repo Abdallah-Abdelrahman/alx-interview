@@ -61,11 +61,13 @@ if __name__ == '__main__':
 
             if (i) % 10 == 0:
                 # print statistic
-                print_statistics(total)
+                if total > 0:
+                    print_statistics(total)
 
             # book keeping
             i += 1
     except KeyboardInterrupt:
         pass
     finally:
-        print_statistics(total)
+        if total > 0:
+            print_statistics(total)
