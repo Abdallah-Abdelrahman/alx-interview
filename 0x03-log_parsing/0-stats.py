@@ -2,7 +2,7 @@
 '''script that reads stdin line by line and computes metrics'''
 import signal
 from sys import stdin
-from re import search
+from re import search, compile
 
 STATUS = {
         200: 0,
@@ -37,15 +37,19 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, handler)
 
     for line in stdin:
-        # regex to match IPv4 address
-        ip_m = search(r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}', line)
+        # regex to match log line
+        ip_regex = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+        mid_regex = r' "GET /projects/260 HTTP/1.1" '
 
-        if not ip_m:
+        regex = compile(ip_regex+r' - \[\S+ \S+\]'+mid_regex+r'(\d{3}) (\d+)$')
+        m = regex.match(line)
+
+        if not m:
             # there's no match skip line
             continue
 
-        toks = line.split(' ')
-        size, status_code = toks[-1].replace('\n', ''), toks[-2]
+        _, __, ___, status_code, size = m.groups()
+        # size, status_code = toks[-1].replace('\n', ''), toks[-2]
 
         if status_code.isnumeric and int(status_code) in STATUS:
             STATUS[int(status_code)] += 1
