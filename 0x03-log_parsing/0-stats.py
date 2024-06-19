@@ -35,7 +35,7 @@ def handler(signum, frame):
 signal.signal(signal.SIGINT, handler)
 
 if __name__ == '__main__':
-    i = 0
+    i = 1
     total = 0
 
     for line in stdin:
