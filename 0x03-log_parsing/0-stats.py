@@ -40,17 +40,17 @@ if __name__ == '__main__':
 
     for line in stdin:
         # regex to match log line
-        ip_regex = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
-        mid_regex = r' "GET /projects/260 HTTP/1.1" '
-
-        regex = compile(ip_regex+r' - \[\S+ \S+\]'+mid_regex+r'(\d{3}) (\d+)$')
+        regex = compile(
+                r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+                r' - \[\S+ \S+\] "GET /projects/260 HTTP/1.1" '
+                r'(\d{3}) (\d+)$'
+                )
         m = regex.match(line)
 
         if not m:
             # there's no match skip line
             continue
 
-        i += 1
         _, __, ___, status_code, size = m.groups()
 
         if status_code.isnumeric and int(status_code) in STATUS:
@@ -58,6 +58,9 @@ if __name__ == '__main__':
         if size.isnumeric:
             total += int(size)
 
-        if i % 10 == 0:
+        # book keeping
+        i += 1
+
+        if (i) % 10 == 0:
             # print statistic
             print_statistics(total)
