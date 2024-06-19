@@ -32,7 +32,7 @@ def handler(signum, frame):
 
 
 # signal interrupt handler
-signal.signal(signal.SIGINT, handler)
+# signal.signal(signal.SIGINT, handler)
 
 if __name__ == '__main__':
     i = 1
@@ -66,7 +66,4 @@ if __name__ == '__main__':
             # book keeping
             i += 1
     except KeyboardInterrupt:
-        pass
-    finally:
-        pass
-        #print_statistics(total)
+        print_statistics(total)
