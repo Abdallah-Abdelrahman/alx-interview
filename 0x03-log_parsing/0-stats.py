@@ -56,7 +56,7 @@ if __name__ == '__main__':
         if size.isnumeric:
             total += int(size)
 
-        if (i + 1) % 10 == 0:
+        if i > 0 and i % 10 == 0:
             # print statistic
             print_statistics(total)
         i += 1
