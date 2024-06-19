@@ -2,7 +2,7 @@
 '''script that reads stdin line by line and computes metrics'''
 import signal
 from sys import stdin, exit
-from re import compile
+# from re import compile
 
 STATUS = {
         '200': 0,
@@ -51,21 +51,24 @@ if __name__ == '__main__':
             # if not m:
             #     # there's no match skip line
             #     continue
-            toks = line.split()
-            status_code, size = toks[-2], int(toks[-1])
+            try:
+                toks = line.split()
+                status_code, size = toks[-2], int(toks[-1])
+                # _, __, ___, status_code, size = m.groups()
 
-            # _, __, ___, status_code, size = m.groups()
+                if status_code in STATUS:
+                    STATUS[status_code] += 1
+                total += size
 
-            if status_code in STATUS:
-                STATUS[status_code] += 1
-            total += size
+                # book keeping
+                i += 1
 
-            # book keeping
-            i += 1
+                if i % 10 == 0:
+                    # print statistic
+                    print_statistics(total)
 
-            if i % 10 == 0:
-                # print statistic
-                print_statistics(total)
+            except Exception:
+                pass
 
     except KeyboardInterrupt:
         pass
