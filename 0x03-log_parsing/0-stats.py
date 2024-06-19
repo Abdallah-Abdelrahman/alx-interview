@@ -58,9 +58,9 @@ if __name__ == '__main__':
         if size.isnumeric:
             total += int(size)
 
-        # book keeping
-        i += 1
-
         if (i) % 10 == 0:
             # print statistic
             print_statistics(total)
+
+        # book keeping
+        i += 1
