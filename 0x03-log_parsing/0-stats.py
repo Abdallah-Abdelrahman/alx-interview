@@ -25,9 +25,17 @@ def print_statistics(total):
     print(out, end='')
 
 
+def handler(signum, frame):
+    '''sginal handler'''
+    print_statistics(total)
+
+
 if __name__ == '__main__':
     i = 0
     total = 0
+    # signal interrupt handler
+    signal.signal(signal.SIGINT, handler)
+
     for line in stdin:
         # regex to match IPv4 address
         ip_m = search(r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}', line)
@@ -38,12 +46,12 @@ if __name__ == '__main__':
 
         toks = line.split(' ')
         size, status_code = toks[-1].replace('\n', ''), toks[-2]
-        if status_code.isnumeric:
+
+        if status_code.isnumeric and int(status_code) in STATUS:
             STATUS[int(status_code)] += 1
         if size.isnumeric:
             total += int(size)
 
-        signal.signal(signal.SIGINT, lambda x, y: print_statistics(total))
         if (i + 1) % 10 == 0:
             # print statistic
             print_statistics(total)
