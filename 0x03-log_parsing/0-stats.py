@@ -5,14 +5,14 @@ from sys import stdin, exit
 from re import compile
 
 STATUS = {
-        200: 0,
-        301: 0,
-        400: 0,
-        401: 0,
-        403: 0,
-        404: 0,
-        405: 0,
-        500: 0
+        '200': 0,
+        '301': 0,
+        '400': 0,
+        '401': 0,
+        '403': 0,
+        '404': 0,
+        '405': 0,
+        '500': 0
 }
 
 
@@ -35,7 +35,7 @@ def handler(signum, frame):
 signal.signal(signal.SIGINT, handler)
 
 if __name__ == '__main__':
-    i = 1
+    i = 0
     total = 0
 
     try:
@@ -52,21 +52,21 @@ if __name__ == '__main__':
             #     # there's no match skip line
             #     continue
             toks = line.split()
-            status_code, size = toks[-2], toks[-1]
+            status_code, size = toks[-2], int(toks[-1])
 
             # _, __, ___, status_code, size = m.groups()
 
-            if status_code.isnumeric and int(status_code) in STATUS:
-                STATUS[int(status_code)] += 1
-            if size.isnumeric:
-                total += int(size)
-
-            if (i) % 10 == 0:
-                # print statistic
-                print_statistics(total)
+            if status_code in STATUS:
+                STATUS[status_code] += 1
+            total += size
 
             # book keeping
             i += 1
+
+            if i % 10 == 0:
+                # print statistic
+                print_statistics(total)
+
     except KeyboardInterrupt:
         pass
     finally:
