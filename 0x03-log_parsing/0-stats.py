@@ -38,29 +38,34 @@ if __name__ == '__main__':
     i = 1
     total = 0
 
-    for line in stdin:
-        # regex to match log line
-        regex = compile(
-                r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
-                r' - \[\S+ \S+\] "GET /projects/260 HTTP/1.1" '
-                r'(\d{3}) (\d+)$'
-                )
-        m = regex.match(line)
+    try:
+        for line in stdin:
+            # regex to match log line
+            regex = compile(
+                    r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+                    r' - \[\S+ \S+\] "GET /projects/260 HTTP/1.1" '
+                    r'(\d{3}) (\d+)$'
+                    )
+            m = regex.match(line)
 
-        if not m:
-            # there's no match skip line
-            continue
+            if not m:
+                # there's no match skip line
+                continue
 
-        _, __, ___, status_code, size = m.groups()
+            _, __, ___, status_code, size = m.groups()
 
-        if status_code.isnumeric and int(status_code) in STATUS:
-            STATUS[int(status_code)] += 1
-        if size.isnumeric:
-            total += int(size)
+            if status_code.isnumeric and int(status_code) in STATUS:
+                STATUS[int(status_code)] += 1
+            if size.isnumeric:
+                total += int(size)
 
-        if (i) % 10 == 0:
-            # print statistic
-            print_statistics(total)
+            if (i) % 10 == 0:
+                # print statistic
+                print_statistics(total)
 
-        # book keeping
-        i += 1
+            # book keeping
+            i += 1
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print_statistics(total)
