@@ -68,5 +68,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     finally:
-        if total > 0:
-            print_statistics(total)
+       print_statistics(total)
