@@ -51,24 +51,22 @@ if __name__ == '__main__':
             # if not m:
             #     # there's no match skip line
             #     continue
-            try:
-                toks = line.split()
-                status_code, size = toks[-2], int(toks[-1])
-                # _, __, ___, status_code, size = m.groups()
+            # _, __, ___, status_code, size = m.groups()
+            toks = line.split()
+            status_code, size = toks[-2], toks[-1]
+            if not size.isnumeric:
+                continue
 
-                if status_code in STATUS:
-                    STATUS[status_code] += 1
-                total += size
+            if status_code in STATUS:
+                STATUS[status_code] += 1
+            total += int(size)
 
-                # book keeping
-                i += 1
+            # book keeping
+            i += 1
 
-                if i % 10 == 0:
-                    # print statistic
-                    print_statistics(total)
-
-            except Exception:
-                pass
+            if i % 10 == 0:
+                # print statistic
+                print_statistics(total)
 
     except KeyboardInterrupt:
         pass
