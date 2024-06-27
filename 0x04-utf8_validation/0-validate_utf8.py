@@ -9,6 +9,8 @@ def validUTF8(data):
         bool: True if valid 1byte utf8, False otherwise
     '''
     for char in data:
+        if 255 < char < 0:
+            return False
         # using bit-wise right shift to get MSB
         # then mask it with one to get the value of MSB
         # if it's 0 then it's valid 1byte utf8
