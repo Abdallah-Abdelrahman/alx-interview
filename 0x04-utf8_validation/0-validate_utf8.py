@@ -19,7 +19,9 @@ def validUTF8(data):
             # check if char in range of byte size (0-255)
             return False
 
-        while count < 4 and bit:
+        while bit:
+            if count > 4:
+                break
             bit = (char >> cursor) & 1
             if bit:
                 # if bit is set increase count
