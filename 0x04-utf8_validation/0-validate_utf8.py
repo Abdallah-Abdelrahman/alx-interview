@@ -3,11 +3,11 @@
 
 
 def validUTF8(data):
-    '''determines if a given data set represents a valid UTF-8 encoding.
+    """determines if a given data set represents a valid UTF-8 encoding.
 
     Returns:
         bool: True if valid utf8 data, False otherwise
-    '''
+    """
     i = 0
     while i < len(data):
         char = data[i]
@@ -15,31 +15,22 @@ def validUTF8(data):
         cursor = 7
         bit = 1
 
-        if char > 255 or char < 0:
-            # check if char in range of byte size (0-255)
-            return False
+        # if char > 255 or char < 0:
+        #     # check if char in range of byte size (0-255)
+        #     return False
 
         while bit:
             if count > 4:
                 break
             bit = (char >> cursor) & 1
             if bit:
-                # if bit is set increase count
+                # if bit is set; increase count,
                 # to determine number of bytes
                 count += 1
             cursor -= 1
 
         if count > 4 or count == 1:
             # invalid bits sequence
-            return False
-        if count == 2 and char < 0b11000010:
-            # Overlong encoding check for 2-byte sequence
-            return False
-        elif count == 3 and char < 0b11100000:
-            # Overlong encoding check for 3-byte sequence
-            return False
-        elif count == 4 and char < 0b11110000:
-            # Overlong encoding check for 4-byte sequence
             return False
 
         for j in range(1, count):
@@ -49,11 +40,11 @@ def validUTF8(data):
                 # invalid byte sequence
                 return False
             byte = data[i + j]
-            if byte > 255 or byte < 0:
-                # check if in range of byte size (0-255)
-                return False
-            if (byte >> 6) != 2:
-                # Check if leftmost 2 bits are 10,
+            # if byte > 255 or byte < 0:
+            #     # check if in range of byte size (0-255)
+            #     return False
+            if byte >> 6 != 0b10:
+                # check value of leftmost 2 bits is 10
                 # indicating continuation code point
                 return False
 
