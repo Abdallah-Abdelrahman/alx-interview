@@ -6,15 +6,38 @@ def validUTF8(data):
     '''determines if a given data set represents a valid UTF-8 encoding.
 
     Returns:
-        bool: True if valid 1byte utf8, False otherwise
+        bool: True if valid utf8 data, False otherwise
     '''
-    for char in data:
-        if 255 < char < 0:
+    i = 0
+    while i < len(data):
+        char = data[i]
+        count = 0
+        cursor = 7
+        bit = 1
+
+        if char > 255 or char < 0:
+            # check if char range of byte size (0-255)
             return False
-        # using bit-wise right shift to get MSB
-        # then mask it with one to get the value of MSB
-        # if it's 0 then it's valid 1byte utf8
-        if (char >> 8) & 1 == 1:
-            return False
+
+        while count < 4 and bit:
+            bit = (char >> cursor) & 1
+            if bit:
+                # if bit is set increase count
+                # to determine number of bytes
+                count += 1
+            cursor -= 1
+
+        for j in range(count):
+            # enumerate thro next elements,
+            # to check there continuation code point
+            i = j + 1
+            byte = data[i]
+            if byte > 255 or char < 0:
+                # check if range of byte size (0-255)
+                return False
+            if (byte >> 6) & 2 != 2:
+                return False
+
+        i += 1
 
     return True
