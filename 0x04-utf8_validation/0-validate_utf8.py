@@ -32,10 +32,12 @@ def validUTF8(data):
             # to check there continuation code point
             i = j + 1
             byte = data[i]
-            if byte > 255 or char < 0:
+            if byte > 255 or byte < 0:
                 # check if range of byte size (0-255)
                 return False
             if (byte >> 6) & 2 != 2:
+                # check value of leftmost 2 bits is 10
+                # indicating continuation code point
                 return False
 
         i += 1
