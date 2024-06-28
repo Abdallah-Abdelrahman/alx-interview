@@ -32,6 +32,15 @@ def validUTF8(data):
         if count > 4 or count == 1:
             # invalid bits sequence
             return False
+        if count == 2 and char < 0b11000010:
+            # Overlong encoding check for 2-byte sequence
+            return False
+        elif count == 3 and char < 0b11100000:
+            # Overlong encoding check for 3-byte sequence
+            return False
+        elif count == 4 and char < 0b11110000:
+            # Overlong encoding check for 4-byte sequence
+            return False
 
         for j in range(1, count):
             # enumerate thro next elements,
