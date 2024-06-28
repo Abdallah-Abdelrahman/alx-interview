@@ -29,7 +29,7 @@ def validUTF8(data):
                 count += 1
             cursor -= 1
 
-        if count > 4:
+        if count > 4 or count == 1:
             # invalid bits sequence
             return False
 
