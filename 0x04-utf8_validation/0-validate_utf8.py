@@ -16,7 +16,7 @@ def validUTF8(data):
         bit = 1
 
         if char > 255 or char < 0:
-            # check if char range of byte size (0-255)
+            # check if char in range of byte size (0-255)
             return False
 
         while count < 4 and bit:
@@ -27,15 +27,22 @@ def validUTF8(data):
                 count += 1
             cursor -= 1
 
-        for j in range(count):
+        if count > 4:
+            # invalid bits sequence
+            return False
+
+        for j in range(count-1):
             # enumerate thro next elements,
-            # to check there continuation code point
+            # to check their continuation code point
             i = j + 1
+            if i >= len(data):
+                # invalid byte sequence
+                return False
             byte = data[i]
             if byte > 255 or byte < 0:
-                # check if range of byte size (0-255)
+                # check if in range of byte size (0-255)
                 return False
-            if (byte >> 6) & 2 != 2:
+            if ((byte >> 6) & 2) != 2:
                 # check value of leftmost 2 bits is 10
                 # indicating continuation code point
                 return False
