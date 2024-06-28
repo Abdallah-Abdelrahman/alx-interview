@@ -3,21 +3,19 @@
 
 
 def validUTF8(data):
-    """determines if a given data set represents a valid UTF-8 encoding.
+    '''determines if a given data set represents a valid UTF-8 encoding.
 
+    Args:
+        data(List[int]): data set to check against
     Returns:
         bool: True if valid utf8 data, False otherwise
-    """
+    '''
     i = 0
     while i < len(data):
         char = data[i]
         count = 0
         cursor = 7
         bit = 1
-
-        # if char > 255 or char < 0:
-        #     # check if char in range of byte size (0-255)
-        #     return False
 
         while bit:
             if count > 4:
@@ -40,9 +38,6 @@ def validUTF8(data):
                 # invalid byte sequence
                 return False
             byte = data[i + j]
-            # if byte > 255 or byte < 0:
-            #     # check if in range of byte size (0-255)
-            #     return False
             if byte >> 6 != 0b10:
                 # check value of leftmost 2 bits is 10
                 # indicating continuation code point
