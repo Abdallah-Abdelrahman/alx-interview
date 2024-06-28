@@ -9,6 +9,8 @@ def validUTF8(data):
         bool: True if valid utf8 data, False otherwise
     '''
     i = 0
+    if not data:
+        return False
     while i < len(data):
         char = data[i]
         count = 0
