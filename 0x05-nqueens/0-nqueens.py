@@ -16,55 +16,62 @@ Attributes:
 from sys import argv
 
 
-_len = len(argv)
+class NQueen:
+    '''class definition for NQueen'''
 
-if _len != 2:
-    print('Usage: nqueens N')
-    exit(1)
+    def __init__(self, n):
+        '''Initialze the instance'''
+        if int(n) < 4:
+            print('N must be at least 4')
+            exit(1)
+        self.board = []
 
-for i in argv[1]:
-    if ord(i) < 48 or ord(i) > 57:
-        print('N must be a number')
-        exit(1)
+    def is_valid(self, iter):
+        '''Validate solution.
 
-num = int(argv[1])
+        Args:
+            iter: list of integers
+        '''
+        _len = len(iter)
+        for i in range(_len):
+            for j in range(i + 1, _len):
+                if iter[i] == iter[j] or abs(i - j) == abs(iter[i] - iter[j]):
+                    return False
+        return True
 
-if int(num) < 4:
-    print('N must be at least 4')
-    exit(1)
+    def perm(self, input, prefix, res):
+        '''Find all permutations of given input
 
+        Args:
+            input(list[int]): list of integer
+            prefix(list[int]): list of candidates
+            res(list:list[int]): result to store all valid solutions
 
-def is_valid(iter):
-    '''Validate solution
+        '''
+        if len(input) == 0 and self.is_valid(prefix):
+            res.append(prefix)
+        for i, n in enumerate(input):
+            self.perm(input[:i] + input[i + 1:], prefix + [n], res)
 
-    Args:
-        iter: list of integers
-    '''
-    _len = len(iter)
-    for i in range(_len):
-        for j in range(i + 1, _len):
-            if iter[i] == iter[j] or abs(i - j) == abs(iter[i] - iter[j]):
-                return False
-    return True
-
-
-def perm(input, prefix, res):
-    '''Find all permutations of given input
-
-    Args:
-        l(list:int): list of integer
-        prefix(list:int): list of candidates
-        res(list:list:int): result to store all valid solutions
-
-    '''
-    if len(input) == 0 and is_valid(prefix):
-        res.append(prefix)
-    for i, n in enumerate(input):
-        perm(input[:i] + input[i + 1:], prefix + [n], res)
+    def solution(self):
+        '''populte the board'''
+        self.perm(list(range(num)), [], self.board)
+        for solution in self.board:
+            print([[i, c] for i, c in enumerate(solution)])
 
 
 if __name__ == '__main__':
-    res = []
-    perm(list(range(num)), [], res)
-    for solution in res:
-        print([[i, c] for i, c in enumerate(solution)])
+    _len = len(argv)
+
+    if _len != 2:
+        print('Usage: nqueens N')
+        exit(1)
+
+    for i in argv[1]:
+        if ord(i) < 48 or ord(i) > 57:
+            print('N must be a number')
+            exit(1)
+
+    num = int(argv[1])
+    try_ = NQueen(num)
+    try_.solution()
