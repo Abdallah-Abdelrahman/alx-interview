@@ -14,7 +14,7 @@ request(
   (err, _response, body) => {
     if (err) {
       console.error({ err });
-      return
+      return;
     }
 
     const chars = JSON.parse(body).characters;
@@ -23,10 +23,10 @@ request(
       request(url, (err, _resp, body) => {
         if (err) {
           reject(err);
-          return
+          return;
         }
         resolve(JSON.parse(body).name);
-      })
+      });
     }));
 
     Promise.all(promises)
